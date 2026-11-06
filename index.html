@@ -58,7 +58,7 @@
 
 <header>
   <h1>Privacy Policy</h1>
-  <p>Mene: Period &amp; Ovulation App &middot; last updated <time datetime="2026-11-04">November 4, 2026</time></p>
+  <p>Mene: Period &amp; Ovulation App &middot; last updated <time datetime="2026-11-06">November 6, 2026</time></p>
 </header>
 
 <section class="card">
@@ -66,9 +66,9 @@
   <p>Mene (&ldquo;the app&rdquo;) is a private cycle and ovulation journal published by <strong>Cool App Helpdesk</strong>. You record your cycle, symptoms and signs, and Mene shows estimates for your fertile window, ovulation and next period.</p>
   <ul>
     <li><strong>We (the developer) never receive your health data.</strong> There is no account, no sign-in and no Mene server.</li>
-    <li><strong>Mene has no internet permission.</strong> It cannot send your journal anywhere, and it makes no network requests at all.</li>
+    <li><strong>Mene never sends your journal anywhere.</strong> Your entries, symptoms and estimates are never transmitted to us or to any third party.</li>
     <li>Your journal is <strong>encrypted on your device</strong>. The encryption key is protected by Android&rsquo;s Keystore and never leaves the phone.</li>
-    <li>There are <strong>no ads, no analytics and no crash-reporting SDKs</strong>, and no third party receives your data.</li>
+    <li>The app contains Google&rsquo;s advertising SDK (AdMob) for one banner on the Profile screen. <strong>Ads are switched off until September 1, 2027</strong>: until then the SDK is never started, makes no network requests and collects nothing. From that date it shows <strong>non-personalised</strong> ads and may collect the device data listed in section 2 &mdash; never anything from your journal. There are no analytics or crash-reporting SDKs.</li>
     <li>If you have Google backup turned on, Android may include an <strong>end-to-end encrypted</strong> copy of your journal in your own Google account backup, so it survives a new phone. Google cannot read it, and neither can we. You can turn this off in Android settings (section 7).</li>
     <li>Mene is <strong>not a medical device</strong> and does not diagnose, treat or prevent any condition. Its estimates are not a method of contraception.</li>
   </ul>
@@ -76,7 +76,17 @@
 
 <section class="card">
   <h2>2. Data we collect</h2>
-  <p><strong>The developer collects nothing.</strong> We have no server, the app has no internet permission, and we receive no journal entries, health data, usage data, analytics or identifiers from the app.</p>
+  <p><strong>The developer collects nothing.</strong> We have no server, and we receive no journal entries, health data, usage data, analytics or identifiers from the app.</p>
+  <p>The <strong>Google AdMob SDK</strong> included in the app is inactive until <strong>September 1, 2027</strong>; before that date it is never initialised and nothing below is collected. From that date, when the Profile screen shows a banner, AdMob may collect:</p>
+  <table>
+    <thead><tr><th>Data</th><th>Purpose</th><th>Received by</th></tr></thead>
+    <tbody>
+      <tr><td>Advertising ID</td><td>Ad delivery, frequency capping and measurement. Ads are requested as non-personalised: they are not chosen from a profile of you.</td><td>Google AdMob</td></tr>
+      <tr><td>Device and app information, ad interactions</td><td>Ad delivery, fraud prevention, analytics</td><td>Google AdMob</td></tr>
+      <tr><td>IP address (approximate location)</td><td>Ad delivery and fraud prevention</td><td>Google AdMob</td></tr>
+    </tbody>
+  </table>
+  <p>AdMob never receives your journal, cycle dates, symptoms, estimates, pregnancy or fertility information: the app gives the ad SDK nothing from it, and the banner is shown only on the Profile screen, away from any estimate. Google processes this data under the <a href="https://policies.google.com/privacy">Google Privacy Policy</a> and <a href="https://policies.google.com/technologies/partner-sites">How Google uses information from sites or apps that use its services</a>.</p>
   <p>The only time we receive anything from you is if you choose to email us for support. In that case we receive your email address and whatever you write in the message, and we use it only to answer you.</p>
   <p class="muted">Mene is distributed through Google Play. Google Play may collect install and crash information under <a href="https://policies.google.com/privacy">Google&rsquo;s Privacy Policy</a>; that is Google&rsquo;s processing as the app store, not ours.</p>
 </section>
@@ -107,7 +117,9 @@
       <tr><td><code>POST_NOTIFICATIONS</code></td><td>Daily check-in and period heads-up reminders. Both are off by default and you can turn them off at any time.</td><td>Only when you turn a reminder on</td></tr>
       <tr><td><code>USE_BIOMETRIC</code>, <code>USE_FINGERPRINT</code></td><td>Optional app lock with your fingerprint or face, or your phone&rsquo;s screen lock.</td><td>Only when you enable app lock</td></tr>
       <tr><td><code>RECEIVE_BOOT_COMPLETED</code></td><td>Restores your reminder schedule after the phone restarts.</td><td>Auto-granted (normal permission)</td></tr>
-      <tr><td><code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code>, <code>ACCESS_NETWORK_STATE</code></td><td>Declared by AndroidX WorkManager to run scheduled reminders. Mene itself has no <code>INTERNET</code> permission, so it cannot send or receive anything.</td><td>Auto-granted (normal permissions)</td></tr>
+      <tr><td><code>WAKE_LOCK</code>, <code>FOREGROUND_SERVICE</code></td><td>Declared by AndroidX WorkManager to run scheduled reminders.</td><td>Auto-granted (normal permissions)</td></tr>
+      <tr><td><code>INTERNET</code>, <code>ACCESS_NETWORK_STATE</code></td><td>Used only by the Google AdMob SDK to load the Profile banner, from September 1, 2027. Mene itself sends nothing over the network.</td><td>Auto-granted (normal permissions)</td></tr>
+      <tr><td><code>com.google.android.gms.permission.AD_ID</code></td><td>Lets Google AdMob read the advertising ID once ads are active (from September 1, 2027). Not read before then.</td><td>Auto-granted (normal permission)</td></tr>
     </tbody>
   </table>
   <p>Mene requests no location, camera, microphone, contacts, SMS or media/storage permission. The only content it reads is what you type into it and a JSON file you explicitly choose to import.</p>
@@ -115,8 +127,11 @@
 
 <section class="card">
   <h2>5. Network activity and third parties</h2>
-  <p><strong>Mene has no network activity.</strong> It does not declare the <code>INTERNET</code> permission, so Android prevents it from opening any connection. Your journal, symptoms and estimates are never transmitted.</p>
-  <p>There is no advertising SDK, no analytics SDK, no crash-reporting SDK, and no social, attribution or cloud-storage SDK. Nothing is sold or shared, because nothing is collected.</p>
+  <p><strong>Mene itself has no network activity.</strong> It has no server and never transmits your journal, symptoms or estimates.</p>
+  <ul>
+    <li><strong>Google AdMob</strong> &mdash; included, but <strong>inactive until September 1, 2027</strong>: the SDK is not initialised before that date, so it makes no requests and reads no identifiers. From that date it loads a non-personalised banner on the Profile screen and may collect the device data in section 2. Where required (for example in the EEA and UK), you will be asked for consent before any ad is shown.</li>
+  </ul>
+  <p>There is no analytics SDK, no crash-reporting SDK, and no social, attribution or cloud-storage SDK. Your health data is never sold or shared.</p>
   <p>Two features can move data, and both are under your control:</p>
   <ul>
     <li><strong>Export:</strong> when you tap &ldquo;Export my data&rdquo;, the app writes a JSON file to a location you choose. Nothing is uploaded by Mene; if you then share that file, the app you share it with handles it.</li>
@@ -134,13 +149,14 @@
   <h2>7. Data retention and deletion</h2>
   <p>Your journal stays on your device until you delete it. In <em>Profile &rarr; Delete everything</em> you can erase the whole journal after a confirmation; removing a person in the app erases that person&rsquo;s journal too. Uninstalling Mene or clearing its storage in <em>Android Settings &rarr; Apps &rarr; Mene &rarr; Storage</em> also deletes everything on the phone.</p>
   <p>An exported JSON file is yours and remains wherever you saved it until you delete it. A Google backup copy is kept by Google under your account&rsquo;s backup settings; you can remove it in <em>Android Settings &rarr; Google &rarr; Backup</em> or your Google account&rsquo;s backup page.</p>
+  <p>Data collected by Google AdMob (from September 1, 2027) is retained by Google under its own policies. You can reset or delete your advertising ID in <em>Android Settings &rarr; Google &rarr; Ads</em>.</p>
   <p>The developer holds no copy of your data, so there is nothing for us to retain or delete on a server.</p>
 </section>
 
 <section class="card">
   <h2>8. Security</h2>
   <p>The journal is encrypted at rest with SQLCipher. Its random 256-bit key is wrapped by an AES-GCM key held in Android&rsquo;s Keystore, which cannot be exported from the device. The app never writes the key in plain text or to logs.</p>
-  <p>Mene also offers an optional app lock, uses Android&rsquo;s app sandbox, and blocks screenshots and screen recording of the app in the release build. Because the app has no internet permission, there is no network path for the data to leave the phone.</p>
+  <p>Mene also offers an optional app lock, uses Android&rsquo;s app sandbox, and blocks screenshots and screen recording of the app in the release build. The app contains no code that sends your journal over the network.</p>
   <p>No system is perfectly secure. Keep a screen lock on your phone, and remember that an exported JSON file is not encrypted.</p>
 </section>
 
